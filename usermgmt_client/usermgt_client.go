@@ -36,8 +36,17 @@ func main() {
 		}
 
 		log.Printf(`User Details:
-		Name : %s
-		Age : %d
-		Id : %d`, result.GetName(), result.GetAge(), result.GetId())
+						Name : %s
+						Age : %d
+						Id : %d`, result.GetName(), result.GetAge(), result.GetId(),
+		)
 	}
+
+	params := pb.GetUsersParams{}
+	result, err := c.GetUsers(ctx, &params)
+	if err != nil {
+		log.Fatalf("could not retrieve users : %v", err)
+	}
+
+	log.Printf("Users : %v", result.GetUsers())
 }
