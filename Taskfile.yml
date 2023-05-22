@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  generate:
+    cmds:
+      - protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative usermgmt/usermgmt.proto
+    desc: Generate gRPC stubs
+  runServer:
+    cmds:
+      - go run ./usermgmt_server/usermgmt_server.go
+    desc: Run gRPC server
+  runClient:
+    cmds:
+      - go run ./usermgmt_client/usermgt_client.go
+    desc: Run gRPC client
+  default:
+    cmds:
+      - task --list-all
+    silent: true
